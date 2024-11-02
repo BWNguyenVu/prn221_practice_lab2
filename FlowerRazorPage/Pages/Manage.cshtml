@@ -1,0 +1,63 @@
+﻿@page
+@model ManageModel
+@{
+    ViewData["Title"] = "Flowers";
+}
+
+
+<h1 style="text-align:center">Flowers Manager</h1>
+
+
+    <p>
+        <a asp-page="Create" class="btn btn-primary" style="background: linear-gradient(to bottom, #0000ff 0%, #009999 100%)">Create New Flower</a>
+    </p>
+    <p>
+        <a asp-page="CreateFlowerMedia" class="btn btn-primary" style="background: linear-gradient(to bottom, #ff9933 0%, #ff6600 100%)">Create New Flower Media</a>
+    </p>
+
+<div class="input-group mb-3" style="width: 100%;">
+    <form method="get" class="w-100 d-flex">
+        <input type="text" class="form-control" placeholder="Find by Name" aria-label="Find by Name" asp-for="SearchTerm" />
+        <div class="input-group-append" style="padding:0 0 0 10px">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Flower Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Flowers != null && Model.Flowers.Any())
+        {
+            foreach (var flower in Model.Flowers)
+            {
+                <tr>
+                    <td>@flower.Name</td>
+                    <td>@flower.Category</td>
+                    <td>@flower.Price</td>
+                    <td>@flower.Description</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@flower.Id">Edit</a> |
+                        <a asp-page="Details" asp-route-id="@flower.Id">Details</a> |
+                        <a asp-page="Delete" asp-route-id="@flower.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" style="text-align:center;">No flowers available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

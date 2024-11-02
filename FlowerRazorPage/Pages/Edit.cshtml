@@ -1,0 +1,38 @@
+﻿@page "{id}"
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Flower";
+}
+
+<h1>Edit Flower</h1>
+
+<form method="post" asp-page="./Edit" asp-route-id="@Model.Flower.Id">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Flower.Name" class="form-control" />
+        <span asp-validation-for="Flower.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Flower.Category"></label>
+        <input asp-for="Flower.Category" class="form-control" />
+        <span asp-validation-for="Flower.Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Flower.Description"></label>
+        <input asp-for="Flower.Description" class="form-control" />
+        <span asp-validation-for="Flower.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Flower.Price"></label>
+        <input asp-for="Flower.Price" class="form-control" />
+        <span asp-validation-for="Flower.Price" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="Flower.Id" />
+    <input type="hidden" asp-for="Flower.RowVersion" />
+    <input type="hidden" asp-for="Flower.AccountId" />
+    <input type="hidden" asp-for="Flower.Account" />
+
+
+    <button type="submit" style="margin-top:10px" class="btn btn-primary">Save</button>
+</form>

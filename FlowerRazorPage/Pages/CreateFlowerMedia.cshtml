@@ -1,0 +1,36 @@
+﻿@page
+@model CreateFlowerMediaModel
+@{
+    ViewData["Title"] = "Create Flower Media";
+}
+
+<h1>Create Flower Media</h1>
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label asp-for="SelectedFlowerId">Select Flower</label>
+        <select asp-for="SelectedFlowerId" class="form-control" asp-items="@(new SelectList(Model.Flowers, "Id", "Name"))">
+            <option value="">-- Select Flower --</option> <!-- Optional default option -->
+        </select>
+        <span asp-validation-for="SelectedFlowerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrl"></label>
+        <input type="file" asp-for="ImageUrl" class="form-control" accept="image/*" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MediaType"></label>
+        <input asp-for="MediaType" class="form-control" />
+        <span asp-validation-for="MediaType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Caption"></label>
+        <input asp-for="Caption" class="form-control" />
+        <span asp-validation-for="Caption" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

@@ -1,0 +1,61 @@
+﻿@page
+@model DetailsModel
+@{
+    ViewData["Title"] = "Flower Details";
+}
+
+<h1>Flower Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Name</dt>
+        <dd class="col-sm-10">@Model.Flower.Name</dd>
+        <dt class="col-sm-2">Category</dt>
+        <dd class="col-sm-10">@Model.Flower.Category</dd>
+        <dt class="col-sm-2">Description</dt>
+        <dd class="col-sm-10">@Model.Flower.Description</dd>
+        <dt class="col-sm-2">Price</dt>
+        <dd class="col-sm-10">@Model.Flower.Price</dd>
+        <dt class="col-sm-2">Created At</dt>
+        <dd class="col-sm-10">@Model.Flower.CreatedAt.ToString("dd/MM/yyyy hh:mm:ss tt")</dd>
+    </dl>
+
+    <h4>Flower Media</h4>
+    <dl class="row">
+        @if (Model.FlowerMedia != null && Model.FlowerMedia.Count > 0)
+        {
+            foreach (var media in Model.FlowerMedia)
+            {
+                <form method="post" asp-page-handler="UpdateMedia">
+                    <input type="hidden" name="MediaId" value="@media.Id" />
+                    <input type="hidden" name="FlowerId" value="@Model.Flower.Id" />
+                <dt class="col-sm-2">Media Type</dt>
+                <dd class="col-sm-10">
+                    <input type="text" name="MediaType" value="@media.MediaType" class="form-control" />
+                </dd>
+                <dt class="col-sm-2">Caption</dt>
+                <dd class="col-sm-10">
+                    <input type="text" name="Caption" value="@media.Caption" class="form-control" />
+                </dd>
+                <dt class="col-sm-2">Image</dt>
+                <dd class="col-sm-10">
+                    <img src="@media.ImageUrl" alt="@media.Caption" style="max-width: 200px; max-height: 200px;" />
+                </dd>
+                <dd class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </dd>
+                <hr />
+                </form>
+            }
+        }
+        else
+        {
+            <dd class="col-sm-10">No media available for this flower.</dd>
+        }
+    </dl>
+</div>
+
+<div>
+    <a asp-page="Index" class="btn btn-primary">Back to List</a>
+</div>
